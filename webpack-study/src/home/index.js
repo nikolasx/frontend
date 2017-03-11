@@ -1,9 +1,9 @@
 /**
- * 加载样式
+ * 加载样式文件
  */
-import css from "../common.css"
-import css from "../main.css"
-require("../stylus.styl")
+import css from "../style/common.css";
+import css from "../style/main.css";
+require("../style/stylus.styl");
 
 var app = document.getElementById("app")
 app.innerHTML = '<p>hello , nicholas 123</p>';

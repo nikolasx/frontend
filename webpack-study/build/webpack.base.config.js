@@ -11,7 +11,7 @@ function resolve(relPath) {
 module.exports = {
 
     entry: {
-        home: resolve("../src/home/index.js")
+        home: [resolve("../src/home/index.js")]
     },
 
     output: {
@@ -20,6 +20,15 @@ module.exports = {
 
     module: {
         rules: [
+            {
+                test: /\.js$/,
+                use: [{
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["es2015"]
+                    }
+                }]
+            },
             {
                 test: /\.jpg|jpeg|png|gif$/i,
                 use: [{
@@ -33,19 +42,21 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
-                    use:"css-loader",
-                    fallback:"style-loader"
+                    use: "css-loader",
+                    fallback: "style-loader"
                 })
             },
             {
-                test:/\.styl$/,
-                user:["style-loader","css-loader","stylus-loader"]
+                test: /\.styl$/,
+                //use: ['style-loader', 'css-loader', 'stylus-loader']
+                use: ExtractTextPlugin.extract('style', 'css?sourceMap!autoprefixer!stylus')
             }
-
         ]
     },
     plugins: [
-        new ExtractTextPlugin("css/[name].css")
+        new ExtractTextPlugin({
+            filename: "css/[name].css"
+        })
     ]
 };
 
