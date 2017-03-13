@@ -20,15 +20,29 @@ module.exports = {
 
     module: {
         rules: [
+            //不支持包管理和AMD,CMD的js文件
             {
-                test: /\.js$/,
+                test: resolve("../src/js/ordinary.js"),
                 use: [{
-                    loader: "babel-loader",
+                    loader: "exports-loader",
                     options: {
-                        presets: ["es2015"]
+                        ordinary: "ordinaryObject"
                     }
                 }]
             },
+            //es6 语法转译
+            {
+                test: /\.js|jsx$/,
+                exclude: /(node_modules|bower_components)/,
+                use: [{
+                    loader: "babel-loader",
+                    options: {
+                        cacheDirectory: true,
+                        presets: ['es2015']
+                    }
+                }]
+            },
+            //图片文件的打包
             {
                 test: /\.jpg|jpeg|png|gif$/i,
                 use: [{
@@ -39,6 +53,7 @@ module.exports = {
                     }
                 }]
             },
+            //样式文件
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
@@ -48,9 +63,12 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                //use: ['style-loader', 'css-loader', 'stylus-loader']
-                use: ExtractTextPlugin.extract('style', 'css?sourceMap!autoprefixer!stylus')
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader", "stylus-loader"]
+                })
             }
+
         ]
     },
     plugins: [

@@ -9,8 +9,7 @@ var baseConfig = require("./webpack.base.config.js")
 module.exports = merge(baseConfig,{
 
     output:{
-        path:config.prod.outputPath,
-        publicPath:config.prod.outputPublicPath
+        path:config.prod.outputPath
     }
 
 });

@@ -6,4 +6,9 @@
 }
 li{
     list-style: none;
+}.container {
+  width: 100px;
+  height: 50px;
+  background-image: url(E:\work\frontend\webpack-study\distimg/c540958c8163b6da94d2c14026af428c.jpg);
+  border-radius: 5px;
 }

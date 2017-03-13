@@ -5,13 +5,12 @@ var path = require("path");
 var rootPath = path.resolve(__dirname,"../dist");
 const config ={
     dev:{
-        outputPublicPath: "/",
+        outputPublicPath: "/dist/",
         outputPath: rootPath,
         port:9090
     },
 
     prod:{
-        outputPublicPath: rootPath,
         outputPath: rootPath
     }
 };
